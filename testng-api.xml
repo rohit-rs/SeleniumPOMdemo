@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Smoke TestSuite" verbose="1">
+	<test name="API">
+		<classes>
+			<class
+				name="com.tricentis.demowebshop.tests.FoodOutletAPITests" />
+		</classes>
+	</test>
+</suite>
