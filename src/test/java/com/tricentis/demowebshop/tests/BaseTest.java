@@ -1,24 +1,18 @@
 package com.tricentis.demowebshop.tests;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import com.tricentis.demowebshop.utilities.UiUtils;
+import com.tricentis.demowebshop.utilities.WebDriverManager;
 
 import io.restassured.response.Response;
 
@@ -41,32 +35,20 @@ public class BaseTest {
 
 	@BeforeTest
 	public static void initialize() {
-		config = new Properties();
-		try {
-			FileInputStream selectors = new FileInputStream(System.getProperty("user.dir")
-					+ "/src/test/java/com/tricentis/demowebshop/config/config.properties");
-			config.load(selectors);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		config = UiUtils.loadPropertiesFile(
+				System.getProperty("user.dir") + "/src/test/java/com/tricentis/demowebshop/config/config.properties");
+
 	}
 
 	@BeforeTest
 	public static void launchBrowser() {
-		if (config.getProperty("isUITest").equals("true")) {
-			//test.info("Open browser...");
-			System.setProperty("webdriver.chrome.driver", "resources\\chromedriver.exe");
-			driver = new ChromeDriver();
-			driver.manage().window().maximize();
-			driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-			wait = new WebDriverWait(driver, 60);
-		}
+		driver = WebDriverManager.launchBrowser();
+		wait = new WebDriverWait(driver, 60);
 	}
 
 	@AfterTest
 	public static void tearDown() {
 		if (config.getProperty("isUITest").equals("true")) {
-			//test.info("Close browser...");
 			driver.close();
 			driver.quit();
 		}

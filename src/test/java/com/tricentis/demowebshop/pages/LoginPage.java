@@ -8,7 +8,6 @@ import com.tricentis.demowebshop.tests.BaseTest;
 import com.tricentis.demowebshop.utilities.UiUtils;
 
 public class LoginPage extends BasePage {
-	WebDriver driver;
 
 	@FindBy(id = "Email")
 	private WebElement email;

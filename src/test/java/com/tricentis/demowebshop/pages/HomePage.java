@@ -3,11 +3,14 @@ package com.tricentis.demowebshop.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
+
 import com.tricentis.demowebshop.tests.BaseTest;
 import com.tricentis.demowebshop.utilities.UiUtils;
 
 public class HomePage extends BasePage {
-
+	
 	@FindBy(css = "[class='ico-login']")
 	private WebElement login;
 
@@ -46,6 +49,12 @@ public class HomePage extends BasePage {
 		log.info("Get the logged in user id=> " + user);
 		BaseTest.test.info("Get the logged in user id=> " + user);
 		return user;
+	}
+
+	@SuppressWarnings("unchecked")
+	public HomePage isPageLoaded() {
+		Assert.assertEquals(true, wait.until(ExpectedConditions.visibilityOf(login)).isDisplayed());
+		return this;
 	}
 
 }

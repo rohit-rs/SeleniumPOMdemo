@@ -15,7 +15,7 @@ public class LoginTest extends BaseTest {
 	public void verifyHomePageTitle() {
 		test = extent.createTest("Verify home page title");
 		HomePage homePage = new HomePage(driver);
-		homePage.openDemoshopUrl();
+		homePage.openDemoshopUrl().isPageLoaded();
 		Assert.assertEquals(driver.getTitle(), "Demo Web Shop");
 	}
 
@@ -23,8 +23,7 @@ public class LoginTest extends BaseTest {
 	public void verifyLoginPageTitle() {
 		test = extent.createTest("Verify home page title");
 		HomePage homePage = new HomePage(driver);
-		homePage.openDemoshopUrl();
-		homePage.clickOnLoginLink();
+		homePage.openDemoshopUrl().isPageLoaded().clickOnLoginLink();
 		Assert.assertEquals(driver.getTitle(), "Demo Web Shop. Login");
 	}
 
