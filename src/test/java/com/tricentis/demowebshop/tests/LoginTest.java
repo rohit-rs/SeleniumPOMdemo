@@ -4,8 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import com.tricentis.demowebshop.listeners.TestListener;
 import com.tricentis.demowebshop.pages.HomePage;
-import com.tricentis.demowebshop.utilities.TestListener;
 import com.tricentis.demowebshop.utilities.UiUtils;
 
 @Listeners(TestListener.class)
@@ -34,7 +34,7 @@ public class LoginTest extends BaseTest {
 		homePage.openDemoshopUrl().clickOnLoginLink().enterEmail(BaseTest.config.getProperty("username"))
 				.enterPassword(BaseTest.config.getProperty("password")).clickOnLoginButton();
 		Assert.assertEquals(driver.getTitle(), "Demo Web Shop");
-		Assert.assertEquals(homePage.isLogoutDisplayed(), true);
+		Assert.assertTrue(homePage.isLogoutDisplayed());
 		Assert.assertEquals(homePage.getLoggedInUser(), UiUtils.getDecryptedString(BaseTest.config.getProperty("username")));
 
 	}

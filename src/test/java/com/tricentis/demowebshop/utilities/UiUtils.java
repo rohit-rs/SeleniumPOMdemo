@@ -22,10 +22,10 @@ public class UiUtils extends BaseTest {
 	}
 
 	public static String getDecryptedString(String encryptedString) {
-		String decryptedPassword;
+		String decryptedString;
 		byte[] decryptedStringBytes = Base64.getDecoder().decode(encryptedString);
-		decryptedPassword = new String(decryptedStringBytes);
-		return decryptedPassword;
+		decryptedString = new String(decryptedStringBytes);
+		return decryptedString;
 	}
 
 	public static Properties loadPropertiesFile(String filepath) {

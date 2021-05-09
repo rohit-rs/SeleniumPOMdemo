@@ -1,4 +1,4 @@
-package com.tricentis.demowebshop.utilities;
+package com.tricentis.demowebshop.listeners;
 
 import java.util.Arrays;
 
@@ -6,12 +6,11 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-import com.tricentis.demowebshop.tests.BaseTest;
+import static com.tricentis.demowebshop.tests.BaseTest.test;
 
 public class TestListener implements ITestListener {
 	// ExtentTest test = BaseTest.test;
@@ -26,20 +25,19 @@ public class TestListener implements ITestListener {
 		String methodName = result.getMethod().getMethodName();
 		String logText = "<b>" + "TEST CASE: " + methodName.toUpperCase() + " - PASSED" + "</b>";
 		Markup m = MarkupHelper.createLabel(logText, ExtentColor.GREEN);
-		BaseTest.test.pass(m);
+		test.pass(m);
 	}
 
 	@Override
 	public void onTestFailure(ITestResult result) {
 		String exceptionMessage = Arrays.toString(result.getThrowable().getStackTrace());
-		BaseTest.test.fail("<details>" + "<summary>" + "<b>" + "<font color=" + "red>" + "Exception Occured: Click to see" 
+		test.fail("<details>" + "<summary>" + "<b>" + "<font color=" + "red>" + "Exception Occured: Click to see" 
 		+ "</font>" + "</b>" + "</summary>" + exceptionMessage.replaceAll(",", "<br>") + "</details>"
 		+ " \n");
 		String methodName = result.getMethod().getMethodName();
 		String logText = "<b>" + "TEST CASE: " + methodName.toUpperCase() + " - FAILED" + "</b>";
 		Markup m = MarkupHelper.createLabel(logText, ExtentColor.RED);
-		BaseTest.test.log(Status.FAIL, m);
-
+		test.log(Status.FAIL, m);
 	}
 
 	@Override
@@ -47,7 +45,7 @@ public class TestListener implements ITestListener {
 		String methodName = result.getMethod().getMethodName();
 		String logText = "<b>" + "TEST CASE: " + methodName.toUpperCase() + " - SKIPPED" + "</b>";
 		Markup m = MarkupHelper.createLabel(logText, ExtentColor.ORANGE);
-		BaseTest.test.skip(m);
+		test.skip(m);
 
 	}
 
